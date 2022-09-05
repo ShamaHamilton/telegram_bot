@@ -1,14 +1,20 @@
 from aiogram import types
 from aiogram import Dispatcher
+from aiogram.types import ReplyKeyboardRemove
 
 from create_bot import dp, bot
+from keyboards import kb_client
 
 
 # @dp.message_handler(commands=['start', 'help'])
 async def command_start(message: types.Message):
     '''Команды "/start" и "/help".'''
     try:
-        await bot.send_message(message.from_user.id, 'Приятного аппетита')
+        await bot.send_message(
+            message.from_user.id,
+            'Приятного аппетита',
+            reply_markup=kb_client
+        )
         await message.delete()
     except:
         await message.reply(
@@ -31,7 +37,8 @@ async def pizza_place_command(message: types.Message):
     '''Команда "/Расположение".'''
     await bot.send_message(
         message.from_user.id,
-        'ул. 1-я Синичкина 3к1'
+        'ул. 1-я Синичкина 3к1',
+        reply_markup=ReplyKeyboardRemove()
     )
 
 
